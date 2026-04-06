@@ -1,0 +1,353 @@
+/* DashboardPage.css */
+
+/* 1. Container & Header */
+.dashboard-container {
+    padding-bottom: 50px;
+    max-width: 1000px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-top: 10px;
+}
+
+.page-title {
+    color: var(--color-secondary, #1f2937);
+    font-weight: 800;
+    margin: 0;
+}
+
+.current-date {
+    color: #6b7280;
+    font-weight: 500;
+    font-size: 0.9rem;
+    background-color: #f3f4f6;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+/* 2. Filter Panel */
+.filter-panel {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.filter-title {
+    font-weight: 700;
+    color: #374151;
+    font-size: 1rem;
+}
+
+.filter-inputs {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+}
+
+.date-input-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.custom-date-control {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    width: 160px;
+}
+
+.custom-date-control:focus {
+    border-color: var(--color-primary, #ea580c);
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+.date-arrow {
+    padding-bottom: 8px;
+    color: #9ca3af;
+    font-weight: bold;
+}
+
+/* 3. Loading State */
+.loading-container {
+    text-align: center;
+    padding: 60px 0;
+    color: #6b7280;
+}
+
+.custom-spinner {
+    color: var(--color-primary, #ea580c);
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 16px;
+}
+
+/* 4. Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Revenue Card Theme */
+.revenue-card {
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+}
+
+/* Orders Card Theme */
+.orders-card {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+}
+
+.stat-icon-bg {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 5rem;
+    opacity: 0.15;
+    transform: rotate(15deg);
+}
+
+.stat-content {
+    position: relative;
+    z-index: 1;
+}
+
+.stat-title {
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.9;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+.currency,
+.unit {
+    font-size: 1.5rem;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.stat-desc {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* 5. Chart Section */
+.chart-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+}
+
+.chart-header {
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+.chart-title {
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+}
+
+.chart-body {
+    height: 350px;
+    /* Fixed height for Chart.js container */
+    width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-panel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filter-inputs {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .custom-date-control {
+        width: 100%;
+    }
+}
+
+/* --- AI DASHBOARD SECTION --- */
+
+/* 1. Khung thẻ chính */
+.ai-card {
+    border: none !important;
+    border-radius: 20px !important;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(13, 110, 253, 0.15) !important;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+/* 2. Header màu xanh AI */
+.ai-header {
+    background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%) !important;
+    border-bottom: none !important;
+    padding: 20px 25px !important;
+}
+
+.ai-header h5 {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Nút phân tích */
+.btn-ai-analyze {
+    border-radius: 30px !important;
+    padding: 8px 25px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.btn-ai-analyze:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+/* 3. Các thẻ con (3 cột) */
+.ai-sub-card {
+    border-radius: 16px !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    background: #fff;
+}
+
+.ai-sub-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Tiêu đề từng cột */
+.ai-card-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.text-trend {
+    color: #0d6efd;
+}
+
+.text-inventory {
+    color: #d97706;
+}
+
+.text-alert {
+    color: #dc3545;
+}
+
+/* 4. Khối hiển thị số tiền dự báo */
+.forecast-box {
+    background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+    border: 1px dashed #ced4da;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.forecast-money {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #198754, #20c997);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 5px 0;
+}
+
+/* 5. Khối lời khuyên / Cảnh báo */
+.ai-advice-box {
+    background-color: #fff7ed;
+    /* Cam nhạt */
+    border-left: 4px solid #f59e0b;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.ai-alert-box {
+    background-color: #fff5f5;
+    /* Đỏ nhạt */
+    border-left: 4px solid #dc3545;
+    padding: 15px;
+    border-radius: 8px;
+    color: #842029;
+}
+
+.ai-success-box {
+    background-color: #f0fdf4;
+    /* Xanh nhạt */
+    border: 1px solid #bbf7d0;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    color: #15803d;
+}
+
+/* Text phụ */
+.ai-desc-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+    line-height: 1.5;
+    font-style: italic;
+}

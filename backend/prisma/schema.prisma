@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 1. User
+model User {
+  id           Int           @id @default(autoincrement())
+  username     String        @unique
+  email        String?       @unique
+  password     String?
+  role         String        @default("CUSTOMER")
+  
+  // --- THÊM DÒNG NÀY ĐỂ LƯU KHUÔN MẶT ---
+  faceData     Json?         
+  
+  orders       Order[]
+  reservations Reservation[]
+  timekeepings Timekeeping[] 
+}
+
+// 2. Menu
+model Menu {
+  id          Int         @id @default(autoincrement())
+  name        String
+  price       Float
+  category    String
+  image       String?
+  isAvailable Boolean     @default(true)
+  model3dUrl    String?
+  orderItems  OrderItem[]
+}
+
+// 3. Table
+model Table {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  capacity Int
+  status String  @default("EMPTY")
+  orders Order[]
+}
+
+// 4. Reservation (Đặt bàn)
+model Reservation {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String
+  date      DateTime
+  people    Int
+  status    String   @default("PENDING")
+  note      String?
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  
+  orders    Order[]
+}
+
+// 5. Order (Đơn hàng)
+model Order {
+  id            Int      @id @default(autoincrement()) 
+  totalPrice    Float    @default(0)
+  
+  paymentStatus String   @default("UNPAID")
+  orderStatus   String   @default("PENDING")
+  
+  paymentMethod String   @default("CASH")
+  createdAt     DateTime @default(now())
+
+  userId Int?
+  user   User? @relation(fields: [userId], references: [id])
+
+  tableId Int?
+  table   Table? @relation(fields: [tableId], references: [id])
+
+  reservationId Int?
+  reservation   Reservation? @relation(fields: [reservationId], references: [id])
+
+  items    OrderItem[]
+  payments Payment[]
+}
+
+// 6. OrderItem
+model OrderItem {
+  id       Int   @id @default(autoincrement())
+  quantity Int
+  price    Float
+  orderId  Int
+  order    Order @relation(fields: [orderId], references: [id])
+  menuId   Int
+  menu     Menu  @relation(fields: [menuId], references: [id])
+}
+
+// 7. Payment
+model Payment {
+  id            Int      @id @default(autoincrement())
+  orderId       Int
+  amount        Float
+  bankCode      String?
+  transactionNo String?
+  cardType      String?
+  orderInfo     String?
+  status        String   @default("0")
+  createdAt     DateTime @default(now())
+  
+  order         Order    @relation(fields: [orderId], references: [id])
+}
+
+model ChatSession {
+  id        String    @id @default(uuid())
+  history   Json
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Timekeeping {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  checkIn   DateTime @default(now())
+  location  String?  // Lưu vị trí lúc chấm
+  status    String   @default("ON_TIME") // ON_TIME (Đúng giờ) hoặc LATE (Đi muộn)
+  
+  user      User     @relation(fields: [userId], references: [id])
+}

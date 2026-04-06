@@ -1,0 +1,177 @@
+/* src/App.css - PROFESSIONAL DESIGN SYSTEM */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    /* --- 1. PALETTE MÀU (CAM CHÁY BRANDING) --- */
+    /* Dùng hệ màu HSL hoặc Hex có phân cấp để làm UI có chiều sâu */
+    --color-primary-50: #fff7ed;
+    --color-primary-100: #ffedd5;
+    --color-primary-200: #fed7aa;
+    --color-primary-500: #f97316;
+    --color-primary-600: #ea580c;
+    /* MÀU CHỦ ĐẠO */
+    --color-primary-700: #c2410c;
+    /* Hover */
+    --color-primary-800: #9a3412;
+
+    /* --- 2. NEUTRAL COLORS (Xám chuyên nghiệp) --- */
+    --color-gray-50: #f9fafb;
+    /* Nền web */
+    --color-gray-100: #f3f4f6;
+    /* Nền phụ / Hover nhẹ */
+    --color-gray-200: #e5e7eb;
+    /* Border */
+    --color-gray-300: #d1d5db;
+    --color-gray-500: #6b7280;
+    /* Text phụ */
+    --color-gray-800: #1f2937;
+    /* Navbar / Text chính */
+    --color-gray-900: #111827;
+    /* Heading */
+
+    /* --- 3. STATUS COLORS (Trạng thái) --- */
+    --color-success: #10b981;
+    --color-success-bg: #dcfce7;
+    --color-error: #ef4444;
+    --color-error-bg: #fee2e2;
+    --color-warning: #f59e0b;
+    --color-info: #3b82f6;
+
+    /* --- 4. SHADOW ELEVATION (Độ nổi khối) --- */
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-glow: 0 0 15px rgba(234, 88, 12, 0.3);
+    /* Hiệu ứng phát sáng cho nút Primary */
+
+    /* --- 5. BORDER RADIUS --- */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    /* Chuẩn cho Card */
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+
+    /* --- 6. TRANSITIONS --- */
+    --transition-fast: all 0.2s ease;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- RESET & BASE STYLES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--color-gray-50);
+    color: var(--color-gray-800);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- UTILITY CLASSES (Dùng chung cho toàn dự án) --- */
+
+/* 1. Custom Scrollbar (Cho Chrome/Safari) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray-500);
+}
+
+/* 2. Typography Utilities */
+h1,
+h2,
+h3,
+h4 {
+    color: var(--color-gray-900);
+    letter-spacing: -0.025em;
+}
+
+.text-primary {
+    color: var(--color-primary-600) !important;
+}
+
+.text-muted {
+    color: var(--color-gray-500) !important;
+}
+
+/* 3. Card Base Style */
+.card-glass {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow-md);
+}
+
+/* 4. Button Overrides (Bootstrap Replacement) */
+.btn-primary {
+    background-color: var(--color-primary-600) !important;
+    border: none !important;
+    box-shadow: 0 4px 6px rgba(234, 88, 12, 0.25);
+    font-weight: 600 !important;
+    padding: 10px 24px !important;
+    transition: var(--transition-smooth) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-700) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(234, 88, 12, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-outline-primary {
+    color: var(--color-primary-600) !important;
+    border: 1px solid var(--color-primary-600) !important;
+    background: transparent;
+    font-weight: 600 !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--color-primary-50) !important;
+    color: var(--color-primary-700) !important;
+    border-color: var(--color-primary-700) !important;
+}
+
+/* 5. Input Fields */
+.form-control,
+.form-select {
+    border: 1px solid var(--color-gray-200) !important;
+    padding: 10px 14px !important;
+    border-radius: var(--radius-sm) !important;
+    transition: var(--transition-fast);
+    background-color: var(--color-gray-50);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #fff;
+    border-color: var(--color-primary-500) !important;
+    box-shadow: 0 0 0 4px var(--color-primary-100) !important;
+}
+
+/* 6. Toastify Custom */
+.Toastify__toast {
+    border-radius: var(--radius-md) !important;
+    font-family: 'Inter', sans-serif !important;
+    box-shadow: var(--shadow-lg) !important;
+}

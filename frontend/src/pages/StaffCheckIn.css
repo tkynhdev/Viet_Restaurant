@@ -1,0 +1,102 @@
+/* StaffCheckIn.css */
+
+/* --- Container Chính --- */
+.checkin-container {
+    background-color: #f8f9fa;
+    /* Nền sáng nhẹ */
+    min-height: 100vh;
+}
+
+/* --- Card trung tâm --- */
+.checkin-card {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    background: white;
+    width: 100%;
+    max-width: 600px;
+}
+
+.checkin-header {
+    background: linear-gradient(135deg, #0d6efd 0%, #0043a8 100%);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+/* --- Khu vực Camera (Quan trọng) --- */
+.camera-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    /* Giới hạn độ rộng camera */
+    margin: 0 auto 1.5rem auto;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #000;
+    border: 4px solid #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Webcam element */
+.camera-wrapper video {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    /* Đảm bảo video không bị méo */
+}
+
+/* Khung ngắm đè lên video (Face Guide) */
+.face-guide-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 280px;
+    /* Hình oval cho khuôn mặt */
+    border: 3px dashed rgba(255, 255, 255, 0.7);
+    border-radius: 50% 50% 45% 45%;
+    /* Tạo hình dáng giống khuôn mặt hơn */
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.3);
+    /* Làm tối vùng xung quanh khung */
+    pointer-events: none;
+    /* Để click xuyên qua được nếu cần */
+    z-index: 10;
+}
+
+.face-guide-overlay::after {
+    content: "Đặt khuôn mặt vào khung";
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+/* --- Trạng thái GPS --- */
+.gps-status {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Các nút bấm --- */
+.btn-checkin-action {
+    padding: 12px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    transition: transform 0.1s;
+}
+
+.btn-checkin-action:active {
+    transform: scale(0.98);
+}

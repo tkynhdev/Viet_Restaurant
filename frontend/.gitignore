@@ -1,0 +1,57 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# --- Bổ sung bảo mật (Thêm phần này) ---
+
+# Chặn file .env ở mọi nơi (cả gốc và trong backend)
+.env
+**/.env
+backend/.env
+
+# Chặn thêm các biến thể khác cho chắc ăn
+.env.production
+.env.development
+.env.test
+
+# Nếu dùng Mac, chặn file rác hệ thống này
+.DS_Store
+
+# Chặn thư viện nặng
+node_modules
+backend/node_modules
+frontend/node_modules
+
+# Chặn file ảnh upload test
+backend/uploads
+frontend/uploads
+
+# Chặn file môi trường
+.env
+backend/.env
+
+# filepath: c:\do_an_chuyen_nganh\.gitignore
+.env
+backend/.env
+**/.env

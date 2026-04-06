@@ -1,0 +1,155 @@
+/* PaymentResult.css */
+
+/* 1. Page Wrapper */
+.payment-result-wrapper {
+    min-height: 80vh;
+    background-color: #f3f4f6;
+    display: flex;
+    align-items: center;
+    padding: 40px 0;
+}
+
+/* 2. Payment Card */
+.payment-card {
+    border: none;
+    border-radius: 24px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    background: white;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 3. Status Content Common */
+.status-content {
+    padding: 50px 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.status-title {
+    font-weight: 800;
+    margin-bottom: 12px;
+    font-size: 1.75rem;
+}
+
+.status-desc {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+/* 4. Icons & Colors */
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.icon-circle svg {
+    width: 40px;
+    height: 40px;
+}
+
+/* Success Style */
+.success-icon {
+    background-color: #dcfce7;
+    /* Green-100 */
+    color: #166534;
+    /* Green-800 */
+    box-shadow: 0 0 0 8px #f0fdf4;
+    /* Green-50 ring */
+}
+
+.text-success {
+    color: #166534 !important;
+}
+
+/* Failed Style */
+.failed-icon {
+    background-color: #fee2e2;
+    /* Red-100 */
+    color: #991b1b;
+    /* Red-800 */
+    box-shadow: 0 0 0 8px #fef2f2;
+    /* Red-50 ring */
+}
+
+.text-danger {
+    color: #991b1b !important;
+}
+
+/* Loading Style */
+.custom-spinner {
+    width: 3rem;
+    height: 3rem;
+    color: var(--color-primary, #ea580c);
+}
+
+/* 5. Buttons */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.btn-primary-action {
+    background-color: var(--color-primary, #ea580c) !important;
+    border: none !important;
+    padding: 12px !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    font-size: 1rem !important;
+    width: 100%;
+    transition: transform 0.2s !important;
+}
+
+.btn-primary-action:hover {
+    background-color: #c2410c !important;
+    transform: translateY(-2px);
+}
+
+.btn-retry {
+    background-color: #ef4444 !important;
+    /* Red for retry */
+}
+
+.btn-retry:hover {
+    background-color: #dc2626 !important;
+}
+
+.btn-secondary-action {
+    background-color: white !important;
+    border: 1px solid #d1d5db !important;
+    color: #374151 !important;
+    padding: 12px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    width: 100%;
+}
+
+.btn-secondary-action:hover {
+    background-color: #f9fafb !important;
+    color: #111827 !important;
+}

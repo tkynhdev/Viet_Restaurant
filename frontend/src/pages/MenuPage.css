@@ -1,0 +1,215 @@
+/* MenuPage.css */
+
+/* 1. Page Header Layout */
+.page-container {
+    padding-bottom: 40px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.page-title {
+    color: var(--color-secondary, #1f2937);
+    font-weight: 800;
+    margin: 0;
+}
+
+.btn-add-new {
+    background-color: var(--color-primary, #ea580c) !important;
+    border: none !important;
+    padding: 10px 24px !important;
+    font-weight: 600;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 6px rgba(234, 88, 12, 0.2);
+    transition: all 0.2s ease;
+}
+
+.btn-add-new:hover {
+    background-color: #c2410c !important;
+    /* Darker Orange */
+    transform: translateY(-2px);
+}
+
+/* 2. Menu Grid Layout */
+.menu-grid {
+    display: grid;
+    /* Tự động chia cột: Desktop ~3-4 cột, Mobile 1 cột */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+/* 3. Food Card Design */
+.food-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.food-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: #fed7aa;
+    /* Light Orange Border */
+}
+
+/* Image Section */
+.card-image-wrapper {
+    position: relative;
+    height: 200px;
+    /* Fixed height for consistency */
+    width: 100%;
+    background-color: #f3f4f6;
+}
+
+.food-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+/* Badges on Image */
+.card-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.badge-custom {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.badge-food {
+    background-color: #ffffff;
+    color: #f59e0b;
+    /* Yellow-500 */
+}
+
+.badge-drink {
+    background-color: #ffffff;
+    color: #0ea5e9;
+    /* Sky-500 */
+}
+
+.badge-out {
+    background-color: #ef4444;
+    /* Red */
+    color: white;
+}
+
+/* Body Section */
+.card-body-custom {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.food-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.food-price {
+    font-size: 1.25rem;
+    color: var(--color-primary, #ea580c);
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+/* Action Buttons */
+.card-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.btn-action-edit {
+    background-color: #fff7ed !important;
+    /* Orange-50 */
+    color: #ea580c !important;
+    border: 1px solid #fed7aa !important;
+    font-weight: 600 !important;
+    transition: all 0.2s;
+}
+
+.btn-action-edit:hover {
+    background-color: #ea580c !important;
+    color: white !important;
+}
+
+.btn-action-delete {
+    background-color: white !important;
+    color: #ef4444 !important;
+    border: 1px solid #fee2e2 !important;
+    font-weight: 600 !important;
+}
+
+.btn-action-delete:hover {
+    background-color: #ef4444 !important;
+    color: white !important;
+}
+
+/* 4. Modal Styles */
+.btn-submit-modal {
+    background-color: var(--color-primary, #ea580c) !important;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-submit-modal:hover {
+    background-color: #c2410c !important;
+}
+
+.custom-switch .form-check-input:checked {
+    background-color: var(--color-primary, #ea580c);
+    border-color: var(--color-primary, #ea580c);
+}
+
+/* AR Badge Style */
+.badge-custom.bg-info {
+    background-color: #06b6d4 !important;
+    /* Cyan-500 */
+    color: white !important;
+    transition: transform 0.2s;
+}
+
+.badge-custom.bg-info:hover {
+    transform: scale(1.1);
+}
+
+/* Model Viewer Customization */
+model-viewer {
+    background-color: #f9fafb;
+    /* Gray-50 background */
+}

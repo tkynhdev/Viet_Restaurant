@@ -1,0 +1,66 @@
+/* Khung bao ngoài */
+.vr-container-wrapper {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    border: 4px solid #ffffff;
+}
+
+#panorama {
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+    /* Màu nền khi ảnh chưa load */
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* --- TÙY CHỈNH GIAO DIỆN PANNELLUM --- */
+
+/* 1. Tùy chỉnh Hotspot (Nút mũi tên) */
+.pnlm-hotspot-base {
+    transition: all 0.3s ease;
+}
+
+.pnlm-hotspot-base:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+/* 2. Tooltip (Chữ hiện ra khi di chuột vào) */
+.pnlm-tooltip span {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    color: #fff !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pnlm-tooltip span:after {
+    border-top-color: rgba(0, 0, 0, 0.8) !important;
+    /* Mũi tên trỏ xuống */
+}
+
+/* 3. Thanh điều khiển bên dưới (Load bar & Controls) */
+.pnlm-load-box {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-radius: 8px;
+}
+
+.pnlm-controls-container {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent) !important;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}

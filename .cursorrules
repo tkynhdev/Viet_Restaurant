@@ -1,0 +1,11 @@
+# Cấu trúc dự án (Monorepo)
+- Dự án áp dụng mô hình Client-Server phân tách.
+- Frontend (View): ReactJS (Vite), nằm trong thư mục `/frontend`.
+- Backend (Model & Controller): Node.js/Express, nằm trong thư mục `/backend`.
+- Database & ORM: MySQL + Prisma (schema nằm tại `/backend/prisma`).
+
+# Quy tắc cho AI
+- Nếu tôi yêu cầu sửa giao diện, CHỈ được tìm và sửa code trong `/frontend/src`. 
+- Frontend gọi API đến Backend, tuyệt đối không được viết code kết nối database trực tiếp từ Frontend.
+- Nếu tôi yêu cầu sửa logic truy xuất dữ liệu, hãy luôn đọc file `schema.prisma` trong `/backend/prisma` trước để hiểu cấu trúc các bảng rồi mới viết code cho Controller/Service ở `/backend/src`.
+- Nếu cập nhật thư viện, phải chạy npm install đúng ở thư mục tương ứng (backend hoặc frontend), không chạy ở thư mục gốc.

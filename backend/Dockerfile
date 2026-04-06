@@ -1,21 +1,35 @@
-# 1. Dùng Node.js phiên bản nhẹ (Alpine)
-FROM node:20-alpine
+# ============================================
+# Build Stage: Chuẩn bị dependencies
+# ============================================
+FROM node:20-alpine AS builder
 
-# 2. Tạo thư mục làm việc trong container
 WORKDIR /app
 
-# 3. Copy file package để cài thư viện trước (tận dụng cache)
+# Copy package files
 COPY package*.json ./
+
+# Cài thư viện
 RUN npm install
 
-# 4. Copy toàn bộ code vào
+# ============================================
+# Production Stage: Chạy server
+# ============================================
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy từ builder stage
+COPY --from=builder /app/node_modules ./node_modules
+
+# Copy source code
 COPY . .
 
-# 5. Sinh Prisma Client (Bắt buộc)
-RUN npx prisma generate
-
-# 6. Mở cổng 5000
+# Expose port
 EXPOSE 5000
 
-# 7. Lệnh chạy server
-CMD ["npm", "run", "dev"]
+# Health check (kiểm tra server hoạt động)
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD wget --quiet --tries=1 --spider http://localhost:5000/api/menu || exit 1
+
+# Sinh Prisma Client + Chạy migrations + Start server
+CMD ["sh", "-c", "npx prisma generate && npx prisma db push --skip-generate && npm run dev"]

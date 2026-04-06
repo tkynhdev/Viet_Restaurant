@@ -310,7 +310,7 @@ const HomePage = () => {
                             <h4 className="fw-bold text-white mb-4">VIET RESTAURANT</h4>
                             <p className="text-muted"><i className="bi bi-geo-alt me-2 text-warning"></i> Hutech Khu Công Nghệ Cao, TP.HCM</p>
                             <p className="text-muted"><i className="bi bi-telephone me-2 text-warning"></i> 0967.877.911</p>
-                            <p className="text-muted"><i className="bi bi-envelope me-2 text-warning"></i> contact@vietrestaurant.com</p>
+                            <p className="text-muted"><i className="bi bi-envelope me-2 text-warning"></i> thinhdev6604@gmail.com</p>
                             <div className="d-flex gap-3 mt-3">
                                 <Button variant="outline-light" className="rounded-circle btn-social"><i className="bi bi-facebook"></i></Button>
                                 <Button variant="outline-light" className="rounded-circle btn-social"><i className="bi bi-instagram"></i></Button>

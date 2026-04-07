@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 
 // Import file CSS tùy chỉnh
-import './Kitchenpage.css';
+import './KitchenPage.css';
 
 const socket = io('http://localhost:5000');
 

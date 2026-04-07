@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Do an chuyen nganh Nha Hang",
   "main": "src/app.js",
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/app.js",

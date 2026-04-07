@@ -1,7 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const Joi = require('joi');
-const fs = require('fs');
-const path = require('path');
+const { cloudinary } = require('../../config/cloudinary');
 
 const prisma = new PrismaClient();
 
@@ -21,10 +20,11 @@ exports.getAllMenus = async (req, res) => {
             orderBy: { id: 'desc' }
         });
 
+        // For Cloudinary, image field already contains the full URL
+        // No need to construct URL prefix
         const menusWithImage = menus.map(item => ({
             ...item,
-            // Tạo đường dẫn ảnh đầy đủ
-            imageUrl: item.image ? `http://localhost:${process.env.PORT || 5000}/uploads/${item.image}` : null
+            imageUrl: item.image || null // Cloudinary URL is already complete
         }));
 
         res.json(menusWithImage);
@@ -39,15 +39,18 @@ exports.createMenu = async (req, res) => {
         // Validate text trước
         const { error } = menuSchema.validate(req.body);
         if (error) {
-            if (req.file) fs.unlinkSync(req.file.path); // Xóa ảnh nếu validate sai
+            // Delete uploaded file from Cloudinary if validation fails
+            if (req.file) {
+                await cloudinary.uploader.destroy(req.file.filename);
+            }
             return res.status(400).json({ message: error.details[0].message });
         }
 
         // Lấy dữ liệu từ form
         const { name, price, category, isAvailable, model3dUrl } = req.body;
 
-        // Lấy tên file ảnh nếu có upload
-        const imageFilename = req.file ? req.file.filename : null;
+        // Lấy Cloudinary URL nếu có upload
+        const imageUrl = req.file ? req.file.path : null; // Cloudinary provides full URL in req.file.path
 
         const newMenu = await prisma.menu.create({
             data: {
@@ -55,7 +58,7 @@ exports.createMenu = async (req, res) => {
                 price: parseFloat(price),
                 category,
                 isAvailable: isAvailable === 'true' || isAvailable === true,
-                image: imageFilename,
+                image: imageUrl, // Save Cloudinary URL directly
                 model3dUrl: model3dUrl || null // Lưu link 3D
             }
         });
@@ -77,15 +80,21 @@ exports.updateMenu = async (req, res) => {
         const existingMenu = await prisma.menu.findUnique({ where: { id: parseInt(id) } });
         if (!existingMenu) return res.status(404).json({ message: 'Món không tồn tại' });
 
-        let imageFilename = existingMenu.image;
+        let imageUrl = existingMenu.image;
 
         // Nếu có upload ảnh mới
         if (req.file) {
-            imageFilename = req.file.filename;
-            // Xóa ảnh cũ
+            imageUrl = req.file.path; // Cloudinary URL
+            
+            // Delete old image from Cloudinary if exists
             if (existingMenu.image) {
-                const oldPath = path.join(__dirname, '../../uploads', existingMenu.image);
-                if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+                try {
+                    // Extract public_id from Cloudinary URL
+                    const publicId = existingMenu.image.split('/').pop().split('.')[0];
+                    await cloudinary.uploader.destroy(`viet-restaurant/${publicId}`);
+                } catch (deleteError) {
+                    console.log('Failed to delete old image from Cloudinary:', deleteError);
+                }
             }
         }
 
@@ -96,7 +105,7 @@ exports.updateMenu = async (req, res) => {
                 price: parseFloat(price),
                 category,
                 isAvailable: isAvailable === 'true' || isAvailable === true,
-                image: imageFilename,
+                image: imageUrl, // Save Cloudinary URL directly
                 model3dUrl: model3dUrl || null // Cập nhật link 3D
             }
         });
@@ -117,9 +126,15 @@ exports.deleteMenu = async (req, res) => {
 
         if (!menu) return res.status(404).json({ message: 'Món không tồn tại' });
 
+        // Delete image from Cloudinary if exists
         if (menu.image) {
-            const imagePath = path.join(__dirname, '../../uploads', menu.image);
-            if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath);
+            try {
+                // Extract public_id from Cloudinary URL
+                const publicId = menu.image.split('/').pop().split('.')[0];
+                await cloudinary.uploader.destroy(`viet-restaurant/${publicId}`);
+            } catch (deleteError) {
+                console.log('Failed to delete image from Cloudinary:', deleteError);
+            }
         }
 
         await prisma.menu.delete({ where: { id: parseInt(id) } });

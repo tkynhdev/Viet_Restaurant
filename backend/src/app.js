@@ -66,7 +66,8 @@ app.use(morgan('dev'));
 app.use(limiter); // Áp dụng rate limit chung
 
 // --- STATIC FILES ---
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+// Note: No longer serving local uploads folder as we now use Cloudinary
+// app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // --- ROUTES ---
 app.use('/api/auth', authRoutes);

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import MyNavbar from '../components/MyNavbar';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:5000');
+const socket = io(import.meta.env.VITE_API_URL);
 
 const AdminTimekeepingPage = () => {
     const [logs, setLogs] = useState([]);
@@ -27,7 +27,7 @@ const AdminTimekeepingPage = () => {
     const fetchLogs = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/timekeeping', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/timekeeping`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setLogs(res.data);

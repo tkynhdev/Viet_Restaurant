@@ -47,7 +47,7 @@ const StaffCheckIn = () => {
                 const token = localStorage.getItem('token');
                 if (!token) return navigate('/login');
 
-                const res = await axios.get('http://localhost:5000/api/auth/me', {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
@@ -134,7 +134,7 @@ const StaffCheckIn = () => {
             const faceArray = Array.from(detection.descriptor);
             const token = localStorage.getItem('token');
 
-            await axios.post('http://localhost:5000/api/auth/register-face', { faceData: faceArray }, {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register-face`, { faceData: faceArray }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -173,7 +173,7 @@ const StaffCheckIn = () => {
             if (distance < 0.5) {
                 try {
                     const token = localStorage.getItem('token');
-                    await axios.post('http://localhost:5000/api/timekeeping', {
+                    await axios.post(`${import.meta.env.VITE_API_URL}/api/timekeeping`, {
                         location: locationName,
                         distance: locationName.match(/\d+/)[0]
                     }, {

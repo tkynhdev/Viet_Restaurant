@@ -37,7 +37,7 @@ const ChatWidget = () => {
     useEffect(() => {
         const fetchMenu = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/menu');
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/menu`);
                 setMenuList(res.data);
             } catch (err) { console.error("Lỗi load menu chat:", err); }
         };
@@ -62,7 +62,7 @@ const ChatWidget = () => {
         setIsTyping(true);
 
         try {
-            const res = await axios.post('http://localhost:5000/api/ai/chat', {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/ai/chat`, {
                 message: userMsg,
                 sessionId: sessionId
             });

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import './ProfilePage.css';
 
-const socket = io('http://localhost:5000');
+const socket = io(import.meta.env.VITE_API_URL);
 
 const ProfilePage = () => {
     const [myBookings, setMyBookings] = useState([]);
@@ -25,9 +25,9 @@ const ProfilePage = () => {
             const token = localStorage.getItem('token');
             if (!token) return navigate('/login');
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const resBooking = await axios.get('http://localhost:5000/api/reservations/mine', config);
+            const resBooking = await axios.get(`${import.meta.env.VITE_API_URL}/api/reservations/mine`, config);
             setMyBookings(resBooking.data);
-            const resOrder = await axios.get('http://localhost:5000/api/orders/mine', config);
+            const resOrder = await axios.get(`${import.meta.env.VITE_API_URL}/api/orders/mine`, config);
             setMyOrders(resOrder.data);
         } catch (err) {
             console.error(err);
@@ -62,7 +62,7 @@ const ProfilePage = () => {
         }
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:5000/api/auth/change-password',
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/change-password`,
                 { oldPassword: passwordData.oldPassword, newPassword: passwordData.newPassword },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

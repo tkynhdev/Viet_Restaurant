@@ -41,7 +41,7 @@ const CartPage = () => {
             const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
 
             // 1. Tạo đơn hàng
-            const orderRes = await axios.post('http://localhost:5000/api/orders', {
+            const orderRes = await axios.post(`${import.meta.env.VITE_API_URL}/api/orders`, {
                 cartItems: selectedItems,
                 totalPrice: totalPrice,
                 paymentMethod: info.paymentMethod,
@@ -58,7 +58,7 @@ const CartPage = () => {
 
             // XỬ LÝ THEO TỪNG PHƯƠNG THỨC
             if (info.paymentMethod === 'VNPAY') {
-                const vnpRes = await axios.post('http://localhost:5000/api/payment/create_payment_url', {
+                const vnpRes = await axios.post(`${import.meta.env.VITE_API_URL}/api/payment/create_payment_url`, {
                     amount: totalPrice,
                     orderId: orderId,
                     bankCode: 'NCB',

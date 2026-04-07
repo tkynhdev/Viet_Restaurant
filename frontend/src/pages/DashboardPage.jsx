@@ -45,8 +45,8 @@ const DashboardPage = () => {
         setLoading(true);
         try {
             const [revenueRes, topDishesRes] = await Promise.all([
-                axios.get(`http://localhost:5000/api/reports/revenue?from=${dateRange.from}&to=${dateRange.to}`, config),
-                axios.get(`http://localhost:5000/api/reports/top-dishes`, config)
+                axios.get(`${import.meta.env.VITE_API_URL}/api/reports/revenue?from=${dateRange.from}&to=${dateRange.to}`, config),
+                axios.get(`${import.meta.env.VITE_API_URL}/api/reports/top-dishes`, config)
             ]);
             setReport(revenueRes.data);
             setTopDishes(topDishesRes.data);
@@ -61,7 +61,7 @@ const DashboardPage = () => {
     const handleGetForecast = async () => {
         setLoadingAI(true);
         try {
-            const res = await axios.get('http://localhost:5000/api/reports/forecast', config);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/reports/forecast`, config);
             setAiForecast(res.data);
             toast.success("AI đã phân tích xong!");
         } catch (err) {

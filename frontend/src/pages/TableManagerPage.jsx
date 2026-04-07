@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import './TableManagerPage.css';
 
 // Kết nối đến server
-const socket = io('http://localhost:5000');
+const socket = io(import.meta.env.VITE_API_URL);
 
 const TableManagerPage = () => {
     const [tables, setTables] = useState([]);
@@ -40,7 +40,7 @@ const TableManagerPage = () => {
 
     const fetchTables = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/tables');
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/tables`);
             setTables(res.data);
         } catch (err) {
             console.error(err);
@@ -50,7 +50,7 @@ const TableManagerPage = () => {
     const handleAddTable = async () => {
         if (!newTable.name) return toast.warning('Nhập tên bàn!');
         try {
-            await axios.post('http://localhost:5000/api/tables', newTable, config);
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/tables`, newTable, config);
             toast.success('Thêm bàn thành công');
             setShowAddModal(false);
             setNewTable({ name: '', capacity: 4 });
@@ -63,7 +63,7 @@ const TableManagerPage = () => {
     const toggleStatus = async (table) => {
         try {
             const newStatus = table.status === 'EMPTY' ? 'OCCUPIED' : 'EMPTY';
-            await axios.put(`http://localhost:5000/api/tables/${table.id}`, { status: newStatus }, config);
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/tables/${table.id}`, { status: newStatus }, config);
             // fetchTables(); // Không cần gọi thủ công nữa vì Socket sẽ kích hoạt fetchTables
         } catch (err) {
             toast.error('Lỗi cập nhật');
@@ -73,7 +73,7 @@ const TableManagerPage = () => {
     const deleteTable = async (id) => {
         if (!window.confirm('Xóa bàn này?')) return;
         try {
-            await axios.delete(`http://localhost:5000/api/tables/${id}`, config);
+            await axios.delete(`${import.meta.env.VITE_API_URL}/api/tables/${id}`, config);
             toast.success('Đã xóa');
             // fetchTables(); // Socket sẽ lo việc update
         } catch (err) {

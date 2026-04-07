@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 // Import file CSS tùy chỉnh
 import './KitchenPage.css';
 
-const socket = io('http://localhost:5000');
+const socket = io(import.meta.env.VITE_API_URL);
 
 const KitchenPage = () => {
     const [orders, setOrders] = useState([]);
@@ -18,7 +18,7 @@ const KitchenPage = () => {
     const fetchOrders = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/orders', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/orders`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -44,7 +44,7 @@ const KitchenPage = () => {
     const updateStatus = async (id, status) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:5000/api/orders/${id}`, { orderStatus: status }, {
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/orders/${id}`, { orderStatus: status }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 

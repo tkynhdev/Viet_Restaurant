@@ -11,7 +11,7 @@ const StaffPage = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:5000/api/auth/create-staff', info, {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/create-staff`, info, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success(`Đã tạo tài khoản ${info.role} thành công!`);

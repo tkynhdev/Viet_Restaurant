@@ -32,7 +32,7 @@ const MenuPage = () => {
 
     const fetchMenus = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/menu');
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/menu`);
             setMenus(res.data);
         } catch (err) {
             toast.error('Lỗi kết nối server!');
@@ -56,10 +56,10 @@ const MenuPage = () => {
 
         try {
             if (editingItem) {
-                await axios.put(`http://localhost:5000/api/menu/${editingItem.id}`, formData, config);
+                await axios.put(`${import.meta.env.VITE_API_URL}/api/menu/${editingItem.id}`, formData, config);
                 toast.success('Đã cập nhật món ăn!');
             } else {
-                await axios.post('http://localhost:5000/api/menu', formData, config);
+                await axios.post(`${import.meta.env.VITE_API_URL}/api/menu`, formData, config);
                 toast.success('Thêm món mới thành công!');
             }
             handleClose();
@@ -72,7 +72,7 @@ const MenuPage = () => {
     const handleDelete = async (id) => {
         if (window.confirm('Bạn có chắc chắn muốn xóa món này không?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/menu/${id}`, config);
+                await axios.delete(`${import.meta.env.VITE_API_URL}/api/menu/${id}`, config);
                 toast.success('Đã xóa món ăn!');
                 fetchMenus();
             } catch (err) {

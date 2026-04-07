@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import MyNavbar from '../components/MyNavbar';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:5000');
+const socket = io(import.meta.env.VITE_API_URL);
 
 const ReservationPage = () => {
     const [bookings, setBookings] = useState([]);
@@ -31,7 +31,7 @@ const ReservationPage = () => {
 
     const fetchBookings = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/reservations', config);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/reservations`, config);
             setBookings(res.data);
         } catch (err) {
             toast.error('Lỗi tải danh sách đặt bàn');
@@ -40,7 +40,7 @@ const ReservationPage = () => {
 
     const updateStatus = async (id, status) => {
         try {
-            await axios.put(`http://localhost:5000/api/reservations/${id}`, { status }, config);
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/reservations/${id}`, { status }, config);
             toast.success('Đã cập nhật trạng thái');
             fetchBookings();
         } catch (err) {
@@ -53,7 +53,7 @@ const ReservationPage = () => {
     const handleShowAssignModal = async (reservation) => {
         setSelectedReservation(reservation);
         try {
-            const res = await axios.get('http://localhost:5000/api/tables');
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/tables`);
             // Chỉ lấy các bàn đang trống
             setTables(res.data.filter(t => t.status === 'EMPTY'));
             setShowAssignModal(true);
@@ -75,7 +75,7 @@ const ReservationPage = () => {
             const orderId = selectedReservation.orders[0].id;
 
             // Gọi API Backend vừa viết
-            await axios.put(`http://localhost:5000/api/orders/${orderId}/assign-table`, { tableId }, config);
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/orders/${orderId}/assign-table`, { tableId }, config);
 
             toast.success(`Đã xếp khách "${selectedReservation.name}" vào bàn thành công!`);
             setShowAssignModal(false); // Đóng Modal

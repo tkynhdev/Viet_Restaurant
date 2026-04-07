@@ -24,7 +24,7 @@ const PaymentResult = () => {
                 }
 
                 // Gọi Backend kiểm tra chữ ký bảo mật
-                const res = await axios.get('http://localhost:5000/api/payment/vnpay_return', { params });
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/payment/vnpay_return`, { params });
 
                 if (res.data.status === 'success') {
                     setStatus('success');

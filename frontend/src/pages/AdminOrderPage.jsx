@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import './AdminOrderPage.css';
 // Xóa import useReactToPrint và Invoice vì không dùng cách cũ nữa
 
-const socket = io('http://localhost:5000');
+const socket = io(import.meta.env.VITE_API_URL);
 
 const AdminOrderPage = () => {
     const [orders, setOrders] = useState([]);
@@ -22,7 +22,7 @@ const AdminOrderPage = () => {
     // --- CÁC HÀM FETCH ---
     const fetchOrders = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/orders', config);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/orders`, config);
             const sortedOrders = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setOrders(sortedOrders);
         } catch (err) {
@@ -32,7 +32,7 @@ const AdminOrderPage = () => {
 
     const fetchTables = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/tables');
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/tables`);
             setTables(res.data);
         } catch (err) {
             console.error(err);
@@ -43,7 +43,7 @@ const AdminOrderPage = () => {
     // --- LOGIC XỬ LÝ ---
     const updateStatus = async (id, updates) => {
         try {
-            await axios.put(`http://localhost:5000/api/orders/${id}`, updates, config);
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/orders/${id}`, updates, config);
             toast.success('Cập nhật thành công');
             setShowDetailModal(false);
         } catch (err) {
@@ -54,7 +54,7 @@ const AdminOrderPage = () => {
     const handleAssignTable = async (tableId) => {
         if (!selectedOrder) return;
         try {
-            await axios.put(`http://localhost:5000/api/orders/${selectedOrder.id}/assign-table`, { tableId }, config);
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/orders/${selectedOrder.id}/assign-table`, { tableId }, config);
             toast.success(`Đã xếp đơn #${selectedOrder.id} vào bàn!`);
             setShowAssignModal(false);
         } catch (err) {

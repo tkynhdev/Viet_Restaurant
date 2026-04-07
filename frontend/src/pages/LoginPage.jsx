@@ -40,12 +40,12 @@ const LoginPage = () => {
         try {
             if (isRegister) {
                 // Xử lý Đăng ký
-                await axios.post('http://localhost:5000/api/auth/register', { username, password });
+                await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, { username, password });
                 toast.success('Đăng ký thành công! Vui lòng đăng nhập.');
                 setIsRegister(false);
             } else {
                 // Xử lý Đăng nhập
-                const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
+                const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { username, password });
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('user', JSON.stringify(res.data.user));
 
@@ -67,7 +67,7 @@ const LoginPage = () => {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
 
-            const res = await axios.post('http://localhost:5000/api/auth/google', {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/google`, {
                 email: user.email,
                 username: user.displayName,
             });

@@ -38,7 +38,7 @@ const HomePage = () => {
 
     const fetchPublicMenu = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/menu');
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/menu`);
             const availableMenus = res.data.filter(item => item.isAvailable);
             setMenus(availableMenus);
         } catch (err) {
@@ -60,7 +60,7 @@ const HomePage = () => {
             const token = localStorage.getItem('token');
             const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
 
-            await axios.post('http://localhost:5000/api/reservations', {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/reservations`, {
                 ...booking,
                 people: parseInt(booking.people)
             }, config);

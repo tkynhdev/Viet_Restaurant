@@ -15,7 +15,7 @@ const InvoicePage = () => {
                 const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
                 // Gọi API lấy chi tiết đơn hàng (Chúng ta tận dụng API lấy danh sách rồi lọc, hoặc gọi API chi tiết nếu có)
                 // Ở đây ta gọi API lấy danh sách rồi tìm (để đỡ phải viết thêm API backend mới)
-                const res = await axios.get('http://localhost:5000/api/orders', config);
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/orders`, config);
                 const foundOrder = res.data.find(o => o.id === parseInt(id));
                 setOrder(foundOrder);
 

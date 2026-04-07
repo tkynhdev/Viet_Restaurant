@@ -50,16 +50,27 @@ const paymentLimiter = rateLimit({
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : "http://localhost:5173", // Sử dụng env cho production
+        origin: [
+            process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : "http://localhost:5173",
+            "https://dthynh.shop",
+            "https://www.dthynh.shop"
+        ], // Include production domains
         methods: ["GET", "POST", "PUT", "DELETE"], // Thêm PUT, DELETE
-        credentials: true // Cho phép cookie nếu cần
+        credentials: true // Cho phép cookie jika perlu
     }
 });
 
 app.set('socketio', io);
 
 // --- MIDDLEWARES ---
-app.use(cors());
+app.use(cors({
+    origin: [
+        process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : "http://localhost:5173",
+        "https://dthynh.shop",
+        "https://www.dthynh.shop"
+    ],
+    credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));

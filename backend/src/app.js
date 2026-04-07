@@ -1,12 +1,13 @@
+// filepath: c:\do_an_chuyen_nganh\backend\src\app.js
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const path = require('path');
-const http = require('http'); // 1. Import module http
-const { Server } = require("socket.io"); // 2. Import Socket.IO
+const http = require('http');
+const { Server } = require("socket.io");
+const rateLimit = require('express-rate-limit'); // Thêm import
 
-// Load cấu hình
 dotenv.config();
 
 // --- IMPORT ROUTES ---
@@ -22,16 +23,39 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const timekeepingRoutes = require('./routes/timekeepingRoutes');
-// --- CẤU HÌNH SOCKET.IO ---
-const server = http.createServer(app); // 3. Tạo http server từ app của Express
-const io = new Server(server, { // 4. Khởi tạo Socket.IO server
+
+// --- CẤU HÌNH RATE LIMITING ---
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 phút
+    max: 100, // Giới hạn 100 request/IP
+    message: 'Quá nhiều request từ IP này, thử lại sau.',
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
+// Rate limit đặc biệt cho AI (chống spam Gemini)
+const aiLimiter = rateLimit({
+    windowMs: 60 * 1000, // 1 phút
+    max: 10, // Chỉ 10 request/phút cho AI
+    message: 'Quá nhiều request AI, thử lại sau.',
+});
+
+// Rate limit đặc biệt cho Payment (chống spam thanh toán)
+const paymentLimiter = rateLimit({
+    windowMs: 60 * 1000, // 1 phút
+    max: 5, // Chỉ 5 request/phút cho thanh toán
+    message: 'Quá nhiều request thanh toán, thử lại sau.',
+});
+
+const server = http.createServer(app);
+const io = new Server(server, {
     cors: {
-        origin: "http://localhost:5173", // Cho phép frontend ở cổng 5173 kết nối
-        methods: ["GET", "POST"]
+        origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : "http://localhost:5173", // Sử dụng env cho production
+        methods: ["GET", "POST", "PUT", "DELETE"], // Thêm PUT, DELETE
+        credentials: true // Cho phép cookie nếu cần
     }
 });
 
-// 5. [QUAN TRỌNG NHẤT] Gắn `io` vào đối tượng `app` để các controller có thể dùng
 app.set('socketio', io);
 
 // --- MIDDLEWARES ---
@@ -39,6 +63,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+app.use(limiter); // Áp dụng rate limit chung
 
 // --- STATIC FILES ---
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
@@ -50,9 +75,10 @@ app.use('/api/reservations', reservationRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/tables', tableRoutes);
 app.use('/api/reports', reportRoutes);
-app.use('/api/ai', aiRoutes);
-app.use('/api/payment', paymentRoutes);
+app.use('/api/ai', aiLimiter, aiRoutes); // Thêm aiLimiter cho AI
+app.use('/api/payment', paymentLimiter, paymentRoutes); // Thêm paymentLimiter cho Payment
 app.use('/api/timekeeping', timekeepingRoutes);
+
 // --- XỬ LÝ KẾT NỐI SOCKET.IO ---
 io.on('connection', (socket) => {
     console.log(' Một client Admin đã kết nối vào Socket.IO:', socket.id);
@@ -64,10 +90,8 @@ io.on('connection', (socket) => {
 io.on('connection', (socket) => {
     console.log(' Một client đã kết nối:', socket.id);
 
-    // Lắng nghe sự kiện "join_room" từ user
     socket.on('join_room', (userId) => {
-        socket.join(userId.toString()); // Cho user vào phòng riêng có tên là ID của họ
-        console.log(`User ${userId} đã vào phòng riêng.`);
+        socket.join(`user_${userId}`);
     });
 
     socket.on('disconnect', () => {
@@ -76,7 +100,6 @@ io.on('connection', (socket) => {
 });
 
 // --- CHẠY SERVER ---
-// 6. Dùng `server.listen` thay vì `app.listen` cũ
 server.listen(PORT, () => {
     console.log(`-----------------------------------------------`);
     console.log(` Server đang chạy tại: http://localhost:${PORT}`);

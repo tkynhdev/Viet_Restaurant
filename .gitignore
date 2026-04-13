@@ -34,3 +34,5 @@ backend/.env
 .env.production
 .env.development
 .env.test
+.env.docker
+**/.env.docker

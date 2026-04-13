@@ -131,14 +131,13 @@ docker-compose up -d --build
 ### 3. Truy Cập Demo
 
 - **Frontend**: [https://dthynh.shop](https://dthynh.shop)
-- **API Documentation**: [https://dthynh.shop/api](https://dthynh.shop/api)
 
 ### Tài Khoản Demo
 
-- **Admin**: `admin@gmail.com` / `123456`
-- **Staff**: `staff@gmail.com` / `123456`
-- **Chef**: `bep@gmail.com` / `123456`
-- **Cashier**: `thungan@gmail.com` / `123456`
+- **Admin**: `admin` / `123456`
+- **Staff**: `thinh` / `123456`
+- **Chef**: `daubep` / `123456`
+- **Cashier**: `nhanvien` / `123456`
 
 ## Cấu Trúc Thư Mục
 
@@ -284,12 +283,6 @@ Dự án này được giấy phép theo [MIT License](LICENSE).
 - Phone: 0967877911
 - GitHub: [tkynhdev](https://github.com/tkynhdev)
 
-## Lịch Sử Phiên Bản
-
-- **v1.0.0** - Bản đầu tiên với các tính năng cơ bản
-- **v1.1.0** - Thêm chatbot AI và Cloudinary
-- **v1.2.0** - Tinh chỉnh và vá lỗi
-- **v2.0.0** - Cài đặt Docker và production ready
 
 ## Hỗ Trợ
 

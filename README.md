@@ -1,25 +1,25 @@
-# Viet Restaurant - Hê Thong Quan Ly Nha Hang Thong Minh
+# Viet Restaurant - Hệ Thống Quản Lý Nhà Hàng Thông Minh
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Node.js](https://img.shields.io/badge/node.js-18+-green.svg)
 ![React](https://img.shields.io/badge/react-18+-blue.svg)
 ![Docker](https://img.shields.io/badge/docker-ready-blue.svg)
 
-## Gi Thiêu
+## Giới Thiệu
 
-Viet Restaurant là hê thong quan ly nha hang toàn dien, phát triên v i React.js và Node.js. Hê thong cung câp các tính nang quan ly nhà hàng hiên dai bao gom: quàn lý món an, dat bàn, thanh toán online, chatbot AI, và nhiêu tính nang thông minh khác.
+Viet Restaurant là hệ thống quản lý nhà hàng toàn diện, phát triển bằng React.js và Node.js. Hệ thống cung cấp các tính năng quản lý nhà hàng hiện đại bao gồm: quản lý món ăn, đặt bàn, thanh toán online, chatbot AI, và nhiều tính năng thông minh khác.
 
-### Tính Nang Nôi Bat
+### Tính Năng Nổi Bật
 
-- **Quàn lý Menu**: Thêm, sua, xoa món an v i hình ành (Cloudinary)
-- **Dat bàn Online**: Hê thong dat bàn và quàn ly thông tin khách hàng
-- **Thanh toán Online**: Tích hop VNPAY cho thanh toán an toàn
-- **Chatbot AI**: Trô lý ao AI h trö khách hàng chon món và dat bàn
-- **Quàn lý Don hàng**: Theo dõi don hàng và tràng thái thanh toán
-- **Quàn lý Bàn**: Phan công bàn và theo dõi tràng thái
-- **Báo cáo Doanh thu**: Phân tích và báo cáo doanh thu v i AI
-- **Cham công Nhân viên**: Hê thong cham công và quàn lý nhân viên
-- **Real-time Updates**: Sû dung Socket.IO cho cap nhât thoi gian thuc
+- **Quản lý Menu**: Thêm, sửa, xóa món ăn với hình ảnh (Cloudinary)
+- **Đặt bàn Online**: Hệ thống đặt bàn và quản lý thông tin khách hàng
+- **Thanh toán Online**: Tích hợp VNPAY cho thanh toán an toàn
+- **Chatbot AI**: Trợ lý ảo AI giúp khách hàng chọn món và đặt bàn
+- **Quản lý Đơn hàng**: Theo dõi đơn hàng và trạng thái thanh toán
+- **Quản lý Bàn**: Phân công bàn và theo dõi trạng thái
+- **Báo cáo Doanh thu**: Phân tích và báo cáo doanh thu bằng AI
+- **Chấm công Nhân viên**: Hệ thống chấm công và quản lý nhân viên
+- **Real-time Updates**: Sử dụng Socket.IO cho cập nhật thời gian thực
 
 ## Tech Stack
 
@@ -48,15 +48,15 @@ Viet Restaurant là hê thong quan ly nha hang toàn dien, phát triên v i Reac
 - **VNPAY** - Payment Gateway
 - **Render** - Cloud Deployment
 
-## Cai Dat và Chay
+## Cài Đặt và Chạy
 
-### Yêu Cau
+### Yêu Cầu
 
 - Node.js 18+
 - MySQL 8.0+
-- Docker & Docker Compose (tu y chon)
+- Docker & Docker Compose (tùy chọn)
 
-### 1. Chay Local Development
+### 1. Chạy Local Development
 
 #### Backend Setup
 
@@ -108,7 +108,7 @@ cp .env.example .env
 npm run dev
 ```
 
-### 2. Chay v i Docker
+### 2. Chạy với Docker
 
 ```bash
 # Clone repository
@@ -128,54 +128,54 @@ docker-compose up --build
 docker-compose up -d --build
 ```
 
-### 3. Truy Cap Demo
+### 3. Truy Cập Demo
 
 - **Frontend**: [https://dthynh.shop](https://dthynh.shop)
 - **API Documentation**: [https://dthynh.shop/api](https://dthynh.shop/api)
 
-### Tai Khoan Demo
+### Tài Khoản Demo
 
 - **Admin**: `admin@gmail.com` / `123456`
 - **Staff**: `staff@gmail.com` / `123456`
 - **Chef**: `bep@gmail.com` / `123456`
 - **Cashier**: `thungan@gmail.com` / `123456`
 
-## Cau Truc Thu Muc
+## Cấu Trúc Thư Mục
 
 ```
 Viet_Restaurant/
-âââ backend/                    # Backend API
-â   âââ src/
-â   â   âââ controllers/       # Route controllers
-â   â   âââ middleware/        # Custom middleware
-â   â   âââ routes/           # API routes
-â   â   âââ utils/            # Utility functions
-â   â   âââ app.js            # Main app file
-â   âââ prisma/
-â   â   âââ schema.prisma    # Database schema
-â   â   âââ seed.js          # Database seed
-â   âââ config/
-â   â   âââ cloudinary.js    # Cloudinary config
-â   âââ uploads/             # Local uploads (deprecated)
-â   âââ package.json
-â   âââ .env.example
-â
-âââ frontend/                  # Frontend React App
-â   âââ src/
-â   â   âââ components/      # Reusable components
-â   â   âââ pages/           # Page components
-â   â   âââ context/         # React contexts
-â   â   âââ utils/           # Utility functions
-â   â   âââ App.jsx          # Main app component
-â   â   âââ main.jsx         # Entry point
-â   âââ public/
-â   âââ package.json
-â   âââ .env.example
-â
-âââ docker-compose.yml         # Docker configuration
-âââ .env.docker.example        # Docker environment template
-âââ .gitignore
-âââ README.md
+├── backend/                    # Backend API
+│   ├── src/
+│   │   ├── controllers/       # Route controllers
+│   │   ├── middleware/        # Custom middleware
+│   │   ├── routes/           # API routes
+│   │   ├── utils/            # Utility functions
+│   │   └── app.js            # Main app file
+│   ├── prisma/
+│   │   ├── schema.prisma    # Database schema
+│   │   └── seed.js          # Database seed
+│   ├── config/
+│   │   └── cloudinary.js    # Cloudinary config
+│   ├── uploads/             # Local uploads (deprecated)
+│   └── package.json
+│   └── .env.example
+│
+├── frontend/                  # Frontend React App
+│   ├── src/
+│   │   ├── components/      # Reusable components
+│   │   ├── pages/           # Page components
+│   │   ├── context/         # React contexts
+│   │   ├── utils/           # Utility functions
+│   │   ├── App.jsx          # Main app component
+│   │   └── main.jsx         # Entry point
+│   ├── public/
+│   └── package.json
+│   └── .env.example
+│
+├── docker-compose.yml         # Docker configuration
+├── .env.docker.example        # Docker environment template
+├── .gitignore
+└── README.md
 ```
 
 ## API Endpoints
@@ -208,7 +208,7 @@ Viet_Restaurant/
 - `POST /api/payment/create_payment_url` - Create VNPAY payment
 - `GET /api/payment/vnpay_return` - VNPAY return callback
 
-## Cau Hinh Môi Truong
+## Cấu Hình Môi Trường
 
 ### Backend Environment Variables
 
@@ -275,25 +275,25 @@ docker-compose -f docker-compose.prod.yml up -d
 
 ## License
 
-Dê án này duyc giói phep theo [MIT License](LICENSE).
+Dự án này được giấy phép theo [MIT License](LICENSE).
 
-## Liên Hê
+## Liên Hệ
 
-**Nguyên Duc Thinh**
+**Nguyễn Đức Thịnh**
 - Email: thinhdev6604@gmail.com
 - Phone: 0967877911
 - GitHub: [tkynhdev](https://github.com/tkynhdev)
 
-## Lich Su Phien Ban
+## Lịch Sử Phiên Bản
 
-- **v1.0.0** - Ban dau tiên v i các tính nang co ban
+- **v1.0.0** - Bản đầu tiên với các tính năng cơ bản
 - **v1.1.0** - Thêm chatbot AI và Cloudinary
-- **v1.2.0** - Tinh chinh và vá lo i
-- **v2.0.0** - Cai dat Docker và production ready
+- **v1.2.0** - Tinh chỉnh và vá lỗi
+- **v2.0.0** - Cài đặt Docker và production ready
 
-## Hô Trô
+## Hỗ Trợ
 
-Nêú có bât ky câu hôi hay yêu câu h trô, vui lòng liên hê qua:
+Nếu có bất kỳ câu hỏi hay yêu cầu hỗ trợ, vui lòng liên hệ qua:
 
 - Email: thinhdev6604@gmail.com
 - Phone: 0967877911
@@ -301,4 +301,4 @@ Nêú có bât ky câu hôi hay yêu câu h trô, vui lòng liên hê qua:
 
 ---
 
-**Cám on ban dã su dung hê thong Viet Restaurant!** â¨ï¸
+**Cảm ơn bạn đã sử dụng hệ thống Viet Restaurant!** 🍽️

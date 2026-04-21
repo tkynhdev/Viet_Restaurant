@@ -272,9 +272,6 @@ docker-compose -f docker-compose.prod.yml up -d
 4. Push to branch (`git push origin feature/AmazingFeature`)
 5. Open Pull Request
 
-## License
-
-Dự án này được giấy phép theo [MIT License](LICENSE).
 
 ## Liên Hệ
 
